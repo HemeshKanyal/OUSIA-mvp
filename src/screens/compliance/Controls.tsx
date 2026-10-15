@@ -46,7 +46,7 @@ export function Controls() {
           return (
             <Card key={key} as="article" className={cx('flex flex-col p-5', !on && 'border-amber-200')}>
               <div className="flex items-start justify-between gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-700">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink-50 text-ink-700">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <Toggle
@@ -65,14 +65,14 @@ export function Controls() {
                   }}
                 />
               </div>
-              <h2 className="mt-3 font-semibold text-navy-950">{CONTROL_LABEL[key]}</h2>
-              <p className="mt-1 flex-1 text-sm text-navy-600">{body}</p>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-navy-100 pt-3 text-xs">
+              <h2 className="mt-3 font-semibold text-ink-950">{CONTROL_LABEL[key]}</h2>
+              <p className="mt-1 flex-1 text-sm text-ink-600">{body}</p>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-ink-100 pt-3 text-xs">
                 <span className={cx('font-medium', on ? 'text-accent-700' : 'text-amber-800')}>{on ? 'Active' : 'Disabled'}</span>
-                <span className="text-navy-500">{stats[key]}</span>
+                <span className="text-ink-500">{stats[key]}</span>
               </div>
               {locked && (
-                <p className="mt-2 flex items-center gap-1.5 text-xs text-navy-500">
+                <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-500">
                   <Lock className="h-3 w-3" aria-hidden /> Mandatory under IFSCA and VARA rules, cannot be disabled
                 </p>
               )}

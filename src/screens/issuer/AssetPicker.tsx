@@ -16,7 +16,7 @@ export function AssetPicker() {
           onClick={() => setUi({ issuerAssetId: a.id })}
           className={cx(
             'h-9 shrink-0 rounded-full px-4 text-sm font-medium',
-            a.id === selected?.id ? 'bg-navy-900 text-white' : 'bg-white text-navy-700 ring-1 ring-inset ring-navy-200 hover:bg-navy-50',
+            a.id === selected?.id ? 'bg-ink-sheen text-white shadow-sm' : 'bg-white text-ink-700 ring-1 ring-inset ring-ink-200 hover:bg-ink-50',
           )}
         >
           <span className="block max-w-[14rem] truncate">{a.name}</span>

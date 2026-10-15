@@ -5,20 +5,18 @@ import { formatBlock } from '../format';
 import { COMPLIANCE_TABS, INVESTOR_TABS, ISSUER_TABS, ROLE_LABEL, type NavItem } from '../nav';
 import { useStore } from '../store';
 import type { Role } from '../types';
+import { OusiaLogo } from './Logo';
 import { Button, KycBadge, Modal, cx } from './ui';
 
 export function Logo() {
   return (
-    <div className="flex items-center gap-2" aria-label="OUSIA">
-      <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden>
-        <rect width="32" height="32" rx="8" fill="#121d35" />
-        <circle cx="16" cy="16" r="7.5" fill="none" stroke="#fff" strokeWidth="3" />
-        <circle cx="16" cy="16" r="2.5" fill="#0d9f7a" />
-      </svg>
-      <div className="leading-none">
-        <span className="block text-lg font-bold tracking-[0.18em] text-navy-950">OUSIA</span>
-        <span className="hidden text-[10px] font-medium uppercase tracking-wider text-navy-500 sm:block">Settlement infrastructure</span>
-      </div>
+    <div className="flex items-center gap-3">
+      <OusiaLogo className="h-5 w-auto text-ink-900 md:h-6" />
+      <span className="hidden border-l border-ink-200 pl-3 text-[10px] font-medium uppercase leading-tight tracking-wider text-ink-500 lg:block">
+        Settlement
+        <br />
+        infrastructure
+      </span>
     </div>
   );
 }
@@ -40,7 +38,7 @@ function RoleSwitcher({ className }: { className?: string }) {
   const { state, setUi } = useStore();
   const roles: Role[] = ['investor', 'issuer', 'compliance'];
   return (
-    <div role="radiogroup" aria-label="Switch role" className={cx('flex rounded-xl bg-navy-100 p-1', className)}>
+    <div role="radiogroup" aria-label="Switch role" className={cx('flex rounded-xl bg-ink-100 p-1', className)}>
       {roles.map((r) => {
         const active = state.ui.role === r;
         return (
@@ -52,7 +50,7 @@ function RoleSwitcher({ className }: { className?: string }) {
             onClick={() => setUi({ role: r })}
             className={cx(
               'h-8 flex-1 rounded-lg px-3 text-sm font-medium transition-colors md:flex-none md:px-4',
-              active ? 'bg-white text-navy-950 shadow-sm' : 'text-navy-600 hover:text-navy-900',
+              active ? 'bg-white text-ink-950 shadow-sm' : 'text-ink-600 hover:text-ink-900',
             )}
           >
             {ROLE_LABEL[r]}
@@ -70,12 +68,12 @@ function BlockTicker() {
     return () => window.clearInterval(id);
   }, []);
   return (
-    <div className="hidden items-center gap-2 rounded-full bg-navy-50 px-3 py-1.5 text-xs text-navy-600 ring-1 ring-inset ring-navy-100 lg:flex" aria-live="off">
+    <div className="hidden items-center gap-2 rounded-full bg-ink-50 px-3 py-1.5 text-xs text-ink-600 ring-1 ring-inset ring-ink-100 lg:flex" aria-live="off">
       <span className="relative flex h-2 w-2">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-500 opacity-60" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-500" />
       </span>
-      OUSIA Chain (simulated) · block <span className="font-mono text-navy-900">{formatBlock(block)}</span>
+      OUSIA Chain (simulated) · block <span className="font-mono text-ink-900">{formatBlock(block)}</span>
     </div>
   );
 }
@@ -96,7 +94,7 @@ export function ResetButton({ compact }: { compact?: boolean }) {
         {!compact && 'Reset demo'}
       </Button>
       <Modal open={confirming} onClose={() => setConfirming(false)} title="Reset the demo?">
-        <p className="text-sm text-navy-600">
+        <p className="text-sm text-ink-600">
           This restores the seed data: Priya's balance, all assets, pending reviews and the ledger. Anything done in this session is cleared.
         </p>
         <div className="mt-5 flex gap-3">
@@ -121,7 +119,7 @@ export function ResetButton({ compact }: { compact?: boolean }) {
 export function TopBar() {
   const { demoOpen, setDemoOpen } = useStore();
   return (
-    <header className="z-30 shrink-0 border-b border-navy-100 bg-white">
+    <header className="z-30 shrink-0 bg-white">
       <div className="flex h-14 items-center justify-between gap-3 px-4 md:h-16 md:px-6">
         <Logo />
         <RoleSwitcher className="hidden md:flex" />
@@ -147,6 +145,7 @@ export function TopBar() {
       <div className="px-4 pb-3 md:hidden">
         <RoleSwitcher />
       </div>
+      <div className="h-px bg-gradient-to-r from-transparent via-brass-300 to-transparent" aria-hidden />
     </header>
   );
 }
@@ -166,11 +165,11 @@ function RoleContext() {
     .join('')
     .slice(0, 2);
   return (
-    <div className="flex items-center gap-3 rounded-2xl bg-navy-50 p-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy-900 text-sm font-semibold text-white">{initials}</div>
+    <div className="flex items-center gap-3 rounded-2xl bg-ink-50 p-3">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink-gradient text-sm font-semibold text-white ring-2 ring-brass-200">{initials}</div>
       <div className="min-w-0">
-        <p className="truncate text-sm font-semibold text-navy-950">{title}</p>
-        <p className="truncate text-xs text-navy-500">{sub}</p>
+        <p className="truncate text-sm font-semibold text-ink-950">{title}</p>
+        <p className="truncate text-xs text-ink-500">{sub}</p>
         {extra && <div className="mt-1">{extra}</div>}
       </div>
     </div>
@@ -180,7 +179,7 @@ function RoleContext() {
 export function Sidebar() {
   const { items, active, select } = useNav();
   return (
-    <aside className="hidden w-56 shrink-0 flex-col gap-4 overflow-y-auto border-r border-navy-100 bg-white p-4 md:flex lg:w-64">
+    <aside className="hidden w-56 shrink-0 flex-col gap-4 overflow-y-auto border-r border-ink-100 bg-white p-4 md:flex lg:w-64">
       <RoleContext />
       <nav aria-label="Sections">
         <ul className="space-y-1">
@@ -195,7 +194,7 @@ export function Sidebar() {
                   aria-current={isActive ? 'page' : undefined}
                   className={cx(
                     'flex h-10 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors',
-                    isActive ? 'bg-navy-900 text-white' : 'text-navy-700 hover:bg-navy-50',
+                    isActive ? 'bg-ink-sheen text-white shadow-sm' : 'text-ink-700 hover:bg-ink-50',
                   )}
                 >
                   <Icon className="h-4 w-4" aria-hidden />
@@ -213,7 +212,7 @@ export function Sidebar() {
 export function BottomNav() {
   const { items, active, select } = useNav();
   return (
-    <nav aria-label="Sections" className="shrink-0 border-t border-navy-100 bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
+    <nav aria-label="Sections" className="shrink-0 border-t border-ink-100 bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
       <ul className="flex">
         {items.map((item) => {
           const Icon = item.icon;
@@ -224,9 +223,9 @@ export function BottomNav() {
                 type="button"
                 onClick={() => select(item.id)}
                 aria-current={isActive ? 'page' : undefined}
-                className={cx('flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium', isActive ? 'text-navy-950' : 'text-navy-500')}
+                className={cx('flex h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium', isActive ? 'text-ink-950' : 'text-ink-500')}
               >
-                <span className={cx('flex h-7 w-12 items-center justify-center rounded-full transition-colors', isActive && 'bg-navy-100')}>
+                <span className={cx('flex h-7 w-12 items-center justify-center rounded-full transition-colors', isActive && 'bg-ink-100')}>
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
                 {item.label}

@@ -7,11 +7,11 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-navy-50 font-sans text-navy-900 antialiased;
+    @apply bg-ink-50 font-sans text-ink-900 antialiased;
     overflow: hidden;
   }
   *:focus-visible {
-    outline: 2px solid #0a8467;
+    outline: 2px solid #8f6a33;
     outline-offset: 2px;
   }
   input,
@@ -25,6 +25,27 @@
     textarea {
       font-size: 14px;
     }
+  }
+}
+
+@layer components {
+  /* Black-to-white family, matching the monochrome logo */
+  .bg-ink-gradient {
+    background-image: linear-gradient(135deg, #0a0a0a 0%, #262626 55%, #474747 100%);
+  }
+  .bg-ink-sheen {
+    background-image: linear-gradient(180deg, #3a3a3a 0%, #111111 100%);
+  }
+  .bg-brass-sheen {
+    background-image: linear-gradient(180deg, #8f6a33 0%, #6b4f26 100%);
+  }
+  .bg-paper {
+    background-image: linear-gradient(180deg, #ffffff 0%, #f3f3f2 320px, #f3f3f2 100%);
+  }
+  /* Hero card: charcoal gradient with a soft brass glow in the corner */
+  .bg-hero {
+    background-image: radial-gradient(110% 90% at 100% 0%, rgba(196, 157, 92, 0.32) 0%, rgba(196, 157, 92, 0) 55%),
+      linear-gradient(135deg, #0a0a0a 0%, #222222 55%, #3f3f3f 100%);
   }
 }
 
@@ -52,6 +73,24 @@
   .animate-flash {
     animation: flash 1.6s ease-out;
   }
+}
+
+@keyframes corridor {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 0.5rem);
+    opacity: 0;
+  }
+}
+.corridor-dot {
+  animation: corridor 2.4s ease-in-out infinite;
 }
 
 @keyframes sheet-in {

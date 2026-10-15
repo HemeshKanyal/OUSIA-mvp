@@ -15,18 +15,18 @@ export function Holdings() {
   return (
     <>
       <PageHeader title="Holdings" subtitle="Tokens held in your wallet, with on-chain proof for each position" />
-      <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-3">
-        <Card className="p-4">
-          <p className="text-xs text-navy-500">Total value</p>
-          <p className="mt-1 text-lg font-semibold text-navy-950 md:text-xl">{formatInr(p.value)}</p>
+      <div className="mb-5 grid grid-cols-3 gap-2 md:gap-3">
+        <Card className="p-3 md:p-4">
+          <p className="text-[11px] text-ink-500 md:text-xs">Total value</p>
+          <p className="mt-1 text-base font-semibold text-ink-950 md:text-xl">{formatInr(p.value)}</p>
         </Card>
-        <Card className="p-4">
-          <p className="text-xs text-navy-500">Est. annual income</p>
-          <p className="mt-1 text-lg font-semibold text-navy-950 md:text-xl">{formatInr(p.annualIncome)}</p>
+        <Card className="p-3 md:p-4">
+          <p className="text-[11px] text-ink-500 md:text-xs">Est. annual income</p>
+          <p className="mt-1 text-base font-semibold text-ink-950 md:text-xl">{formatInr(p.annualIncome)}</p>
         </Card>
-        <Card className="col-span-2 p-4 md:col-span-1">
-          <p className="text-xs text-navy-500">Positions</p>
-          <p className="mt-1 text-lg font-semibold text-navy-950 md:text-xl">{p.count}</p>
+        <Card className="p-3 md:p-4">
+          <p className="text-[11px] text-ink-500 md:text-xs">Positions</p>
+          <p className="mt-1 text-base font-semibold text-ink-950 md:text-xl">{p.count}</p>
         </Card>
       </div>
 
@@ -49,29 +49,29 @@ export function Holdings() {
                 <Card className="p-4 md:p-5">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
-                      <p className="flex items-center gap-2 text-xs text-navy-500">
+                      <p className="flex items-center gap-2 text-xs text-ink-500">
                         <Flag country={asset.country} /> {asset.assetClass} · {asset.symbol}
                       </p>
-                      <h2 className="mt-1 font-semibold text-navy-950">{asset.name}</h2>
+                      <h2 className="mt-1 font-semibold text-ink-950">{asset.name}</h2>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-semibold text-navy-950">{formatInr(value)}</p>
-                      {fx && <p className="text-[11px] text-navy-500">{fx}</p>}
+                      <p className="text-lg font-semibold text-ink-950">{formatInr(value)}</p>
+                      {fx && <p className="text-[11px] text-ink-500">{fx}</p>}
                     </div>
                   </div>
                   <dl className="mt-3 grid grid-cols-3 gap-3 text-sm">
                     <div>
-                      <dt className="text-xs text-navy-500">Tokens</dt>
-                      <dd className="font-medium text-navy-900">{formatNumber(holding.tokens)}</dd>
+                      <dt className="text-xs text-ink-500">Tokens</dt>
+                      <dd className="font-medium text-ink-900">{formatNumber(holding.tokens)}</dd>
                     </div>
                     <div>
-                      <dt className="text-xs text-navy-500">{asset.yieldPct != null ? asset.yieldLabel : 'Yield'}</dt>
-                      <dd className="font-medium text-navy-900">{asset.yieldPct != null ? `${asset.yieldPct}%` : '-'}</dd>
+                      <dt className="text-xs text-ink-500">{asset.yieldPct != null ? asset.yieldLabel : 'Yield'}</dt>
+                      <dd className="font-medium text-ink-900">{asset.yieldPct != null ? `${asset.yieldPct}%` : '-'}</dd>
                     </div>
                     <div className="min-w-0">
-                      <dt className="text-xs text-navy-500">On-chain proof</dt>
+                      <dt className="text-xs text-ink-500">On-chain proof</dt>
                       <dd className="truncate text-sm">
-                        <Hash hash={lastTx} />
+                        <Hash hash={lastTx} short />
                       </dd>
                     </div>
                   </dl>

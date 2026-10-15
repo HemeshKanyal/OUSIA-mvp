@@ -18,10 +18,10 @@ export function Me() {
       <div className="grid gap-5 lg:grid-cols-2">
         <Card as="section" className="p-5">
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-navy-900 text-lg font-semibold text-white">PS</div>
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-ink-gradient text-lg font-semibold text-white ring-2 ring-brass-200">PS</div>
             <div className="min-w-0">
-              <p className="text-lg font-semibold text-navy-950">{priya.name}</p>
-              <p className="truncate text-sm text-navy-500">
+              <p className="text-lg font-semibold text-ink-950">{priya.name}</p>
+              <p className="truncate text-sm text-ink-500">
                 {priya.email} · user #{priya.userNo}
               </p>
               <div className="mt-1">
@@ -41,26 +41,26 @@ export function Me() {
           <SectionTitle>KYC status</SectionTitle>
           <ul className="space-y-2">
             {['PAN verified', 'Aadhaar e-KYC', 'Video KYC', 'FATCA / CRS declaration', 'Sanctions & PEP screening'].map((item) => (
-              <li key={item} className="flex items-center gap-2 text-sm text-navy-800">
+              <li key={item} className="flex items-center gap-2 text-sm text-ink-800">
                 <CheckCircle2 className="h-4 w-4 text-accent-600" aria-hidden />
                 {item}
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-navy-500">Verified claims are written to the OUSIA identity registry, so every token transfer can check them automatically.</p>
+          <p className="mt-3 text-xs text-ink-500">Verified claims are written to the OUSIA identity registry, so every token transfer can check them automatically.</p>
         </Card>
 
         <Card as="section" className="p-5">
           <SectionTitle>Wallet</SectionTitle>
-          <p className="text-xs text-navy-500">Custodial smart wallet (MPC)</p>
+          <p className="text-xs text-ink-500">Custodial smart wallet (MPC)</p>
           <div className="mt-1 flex items-start gap-1">
-            <p className="min-w-0 flex-1 break-all font-mono text-sm text-navy-900">{priya.wallet}</p>
+            <p className="min-w-0 flex-1 break-all font-mono text-sm text-ink-900">{priya.wallet}</p>
             <CopyButton value={priya.wallet} label="Copy wallet address" />
           </div>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="text-xs text-navy-500">Cash balance</p>
-              <p className="text-xl font-semibold text-navy-950">{formatInr(priya.balance)}</p>
+              <p className="text-xs text-ink-500">Cash balance</p>
+              <p className="text-xl font-semibold text-ink-950">{formatInr(priya.balance)}</p>
             </div>
             <Button
               variant="secondary"
@@ -79,7 +79,7 @@ export function Me() {
         <Card as="section" className="p-5">
           <SectionTitle>LRS usage this financial year</SectionTitle>
           <ProgressBar value={(invested / LRS_LIMIT_INR) * 100} label="LRS limit used" />
-          <p className="mt-2 text-sm text-navy-700">
+          <p className="mt-2 text-sm text-ink-700">
             {formatInr(invested)} of {formatInr(LRS_LIMIT_INR)} (USD 250,000)
           </p>
           <div className="mt-4 flex flex-wrap gap-2">

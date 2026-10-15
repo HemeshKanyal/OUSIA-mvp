@@ -27,7 +27,7 @@ export function App() {
       <DemoStrip />
       <div className="flex min-h-0 flex-1">
         <Sidebar />
-        <main id="main" ref={mainRef} className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden">
+        <main id="main" ref={mainRef} className="bg-paper min-w-0 flex-1 overflow-y-auto overflow-x-hidden">
           <div key={`${resetKey}-${ui.role}`} className="animate-fade mx-auto w-full max-w-6xl px-4 py-5 md:px-8 md:py-8">
             {ui.role === 'investor' && <InvestorApp />}
             {ui.role === 'issuer' && <IssuerApp />}

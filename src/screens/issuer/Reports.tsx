@@ -74,11 +74,11 @@ export function IssuerReports() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {reports.map((r) => (
           <Card key={r.id} as="article" className="flex flex-col p-5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-700">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink-50 text-ink-700">
               <FileSpreadsheet className="h-5 w-5" aria-hidden />
             </div>
-            <h2 className="mt-3 font-semibold text-navy-950">{r.title}</h2>
-            <p className="mt-1 flex-1 text-sm text-navy-600">{r.body}</p>
+            <h2 className="mt-3 font-semibold text-ink-950">{r.title}</h2>
+            <p className="mt-1 flex-1 text-sm text-ink-600">{r.body}</p>
             <Button
               variant="secondary"
               className="mt-4"

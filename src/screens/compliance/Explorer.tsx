@@ -41,33 +41,33 @@ export function Explorer() {
           ['Avg. settlement', '1.2s'],
         ].map(([k, v]) => (
           <Card key={k} className="p-4">
-            <p className="text-xs text-navy-500">{k}</p>
-            <p className="mt-1 truncate text-lg font-semibold text-navy-950">{v}</p>
+            <p className="text-xs text-ink-500">{k}</p>
+            <p className="mt-1 truncate text-lg font-semibold text-ink-950">{v}</p>
           </Card>
         ))}
       </div>
 
       <Card className="overflow-hidden">
-        <div className="flex flex-col gap-3 border-b border-navy-100 p-4 sm:flex-row">
+        <div className="flex flex-col gap-3 border-b border-ink-100 p-4 sm:flex-row">
           <div className="relative flex-1">
             <label htmlFor="ex-search" className="sr-only">
               Search by hash, party or asset
             </label>
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" aria-hidden />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" aria-hidden />
             <input
               id="ex-search"
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search tx hash, party or asset"
-              className="h-10 w-full rounded-xl border border-navy-200 pl-9 pr-3 text-navy-900"
+              className="h-10 w-full rounded-xl border border-ink-200 pl-9 pr-3 text-ink-900"
             />
           </div>
           <div>
             <label htmlFor="ex-type" className="sr-only">
               Event type
             </label>
-            <select id="ex-type" value={type} onChange={(e) => setType(e.target.value as LedgerEventType | 'ALL')} className="h-10 w-full rounded-xl border border-navy-200 bg-white px-3 text-navy-900 sm:w-48">
+            <select id="ex-type" value={type} onChange={(e) => setType(e.target.value as LedgerEventType | 'ALL')} className="h-10 w-full rounded-xl border border-ink-200 bg-white px-3 text-ink-900 sm:w-48">
               <option value="ALL">All event types</option>
               {types.map((t) => (
                 <option key={t} value={t}>

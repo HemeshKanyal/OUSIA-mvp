@@ -4,6 +4,7 @@ import { Badge, Button, Card, EmptyState, Hash, SectionTitle, cx } from '../../c
 import { JURISDICTION_LABEL, JURISDICTION_SHORT, formatNumber, timeAgo } from '../../format';
 import { complianceMetrics, useStore } from '../../store';
 import type { ActionKind, Jurisdiction, PendingAction } from '../../types';
+import { Corridor } from './Corridor';
 import { RULESETS } from './rules';
 
 const KIND_ICON: Record<ActionKind, typeof Building2> = {
@@ -12,15 +13,15 @@ const KIND_ICON: Record<ActionKind, typeof Building2> = {
   SANCTIONS: ShieldAlert,
 };
 
-function Kpi({ label, value, icon: Icon, tone }: { label: string; value: number; icon: typeof Users; tone: 'navy' | 'amber' | 'red' }) {
+function Kpi({ label, value, icon: Icon, tone }: { label: string; value: number; icon: typeof Users; tone: 'ink' | 'amber' | 'red' }) {
   return (
     <Card className="p-4 md:p-5">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm text-navy-600">{label}</p>
+        <p className="text-sm text-ink-600">{label}</p>
         <span
           className={cx(
             'flex h-8 w-8 items-center justify-center rounded-lg',
-            tone === 'navy' && 'bg-navy-50 text-navy-700',
+            tone === 'ink' && 'bg-ink-50 text-ink-700',
             tone === 'amber' && 'bg-amber-50 text-amber-700',
             tone === 'red' && 'bg-red-50 text-red-700',
           )}
@@ -28,7 +29,7 @@ function Kpi({ label, value, icon: Icon, tone }: { label: string; value: number;
           <Icon className="h-4 w-4" aria-hidden />
         </span>
       </div>
-      <p key={value} className="animate-fade mt-2 text-2xl font-semibold tracking-tight text-navy-950 md:text-3xl">
+      <p key={value} className="animate-fade mt-2 text-2xl font-semibold tracking-tight text-ink-950 md:text-3xl">
         {formatNumber(value)}
       </p>
     </Card>
@@ -59,15 +60,15 @@ function ActionRow({ action }: { action: PendingAction }) {
   };
 
   return (
-    <li className={cx('flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center md:px-5', !pending && 'bg-navy-50/50')}>
+    <li className={cx('flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center md:px-5', !pending && 'bg-ink-50/50')}>
       <div className="flex min-w-0 flex-1 items-start gap-3">
-        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-700">
+        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-ink-700">
           <Icon className="h-4 w-4" aria-hidden />
         </span>
         <div className="min-w-0">
-          <p className="font-medium text-navy-950">{action.title}</p>
-          <p className="mt-0.5 text-sm text-navy-600">{action.detail}</p>
-          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-navy-500">
+          <p className="font-medium text-ink-950">{action.title}</p>
+          <p className="mt-0.5 text-sm text-ink-600">{action.detail}</p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-ink-500">
             <Badge tone={action.priority === 'High' ? 'red' : 'neutral'}>{action.priority}</Badge>
             <span>{JURISDICTION_SHORT[action.jurisdiction]}</span>
             <span>· {pending ? `opened ${timeAgo(action.createdAt)}` : `resolved ${timeAgo(action.resolvedAt ?? Date.now())}`}</span>
@@ -108,15 +109,15 @@ function RuleSet({ jur }: { jur: Jurisdiction }) {
   const rs = RULESETS[jur];
   return (
     <div>
-      <p className="text-sm font-semibold text-navy-950">{JURISDICTION_LABEL[jur]}</p>
-      <p className="text-xs text-navy-500">
+      <p className="text-sm font-semibold text-ink-950">{JURISDICTION_LABEL[jur]}</p>
+      <p className="text-xs text-ink-500">
         {rs.regulator} · {rs.currency}
       </p>
       <ul className="mt-3 space-y-2">
         {rs.rules.map((r) => (
-          <li key={r.title} className="rounded-xl border border-navy-100 p-3">
+          <li key={r.title} className="rounded-xl border border-ink-100 p-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-sm font-medium text-navy-900">{r.title}</p>
+              <p className="text-sm font-medium text-ink-900">{r.title}</p>
               {r.onChain ? (
                 <Badge tone="green">
                   <Lock className="h-3 w-3" aria-hidden /> Enforced on-chain
@@ -125,7 +126,7 @@ function RuleSet({ jur }: { jur: Jurisdiction }) {
                 <Badge tone="neutral">Operational</Badge>
               )}
             </div>
-            <p className="mt-1 text-xs text-navy-600">{r.detail}</p>
+            <p className="mt-1 text-xs text-ink-600">{r.detail}</p>
           </li>
         ))}
       </ul>
@@ -145,30 +146,33 @@ export function Overview() {
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
-        <Kpi label="Investors" value={m.investors} icon={Users} tone="navy" />
+        <Kpi label="Investors" value={m.investors} icon={Users} tone="ink" />
         <Kpi label="Pending reviews" value={m.pendingReviews} icon={ClipboardList} tone="amber" />
         <Kpi label="Alerts" value={m.alerts} icon={AlertTriangle} tone="red" />
         <Kpi label="Blocked transfers" value={m.blocked} icon={ShieldAlert} tone="red" />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_24rem]">
+      <div className="grid gap-5 2xl:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="min-w-0 space-y-5">
         <Card as="section" className="overflow-hidden">
-          <div className="border-b border-navy-100 px-4 pt-4 md:px-5">
+          <div className="border-b border-ink-100 px-4 pt-4 md:px-5">
             <SectionTitle>Pending actions</SectionTitle>
           </div>
           {actions.length === 0 ? (
             <EmptyState icon={<ClipboardList className="h-5 w-5" aria-hidden />} title="Nothing needs your attention here" body="No escalated items for this jurisdiction." />
           ) : (
-            <ul className="divide-y divide-navy-100">
+            <ul className="divide-y divide-ink-100">
               {actions.map((a) => (
                 <ActionRow key={a.id} action={a} />
               ))}
             </ul>
           )}
-          <p className="border-t border-navy-100 px-4 py-3 text-xs text-navy-500 md:px-5">
+          <p className="border-t border-ink-100 px-4 py-3 text-xs text-ink-500 md:px-5">
             + {formatNumber(m.backgroundReviews)} routine reviews in the queue, auto-screened and within SLA.
           </p>
         </Card>
+        <Corridor />
+        </div>
 
         <Card as="section" className="p-4 md:p-5">
           <SectionTitle>Rule set</SectionTitle>

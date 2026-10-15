@@ -42,14 +42,14 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
       {step === 'form' && (
         <div className="space-y-4">
           <div>
-            <label htmlFor="transfer-to" className="text-sm font-medium text-navy-800">
+            <label htmlFor="transfer-to" className="text-sm font-medium text-ink-800">
               Recipient
             </label>
             <select
               id="transfer-to"
               value={recipientId}
               onChange={(e) => setRecipientId(e.target.value)}
-              className="mt-1.5 h-11 w-full rounded-xl border border-navy-200 bg-white px-3 text-navy-900"
+              className="mt-1.5 h-11 w-full rounded-xl border border-ink-200 bg-white px-3 text-ink-900"
               data-autofocus
             >
               {recipients.map((r) => (
@@ -58,10 +58,10 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
                 </option>
               ))}
             </select>
-            {recipient && <p className="mt-1 break-all font-mono text-[11px] text-navy-500">{recipient.wallet}</p>}
+            {recipient && <p className="mt-1 break-all font-mono text-[11px] text-ink-500">{recipient.wallet}</p>}
           </div>
           <div>
-            <label htmlFor="transfer-qty" className="text-sm font-medium text-navy-800">
+            <label htmlFor="transfer-qty" className="text-sm font-medium text-ink-800">
               Tokens
             </label>
             <input
@@ -69,10 +69,10 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
               inputMode="numeric"
               value={raw}
               onChange={(e) => setRaw(e.target.value.replace(/[^\d]/g, '').slice(0, 9))}
-              className="mt-1.5 h-11 w-full rounded-xl border border-navy-200 px-3 text-navy-900"
+              className="mt-1.5 h-11 w-full rounded-xl border border-ink-200 px-3 text-ink-900"
               aria-describedby="transfer-hint"
             />
-            <p id="transfer-hint" className="mt-1 text-xs text-navy-500">
+            <p id="transfer-hint" className="mt-1 text-xs text-ink-500">
               Available: {formatNumber(held)} {asset.symbol} · value {formatInr(tokens * asset.pricePerToken)}
             </p>
           </div>
@@ -81,8 +81,8 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
               {error || invalid}
             </p>
           )}
-          <p className="flex items-start gap-2 rounded-xl bg-navy-50 p-3 text-xs text-navy-600">
-            <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-navy-500" aria-hidden />
+          <p className="flex items-start gap-2 rounded-xl bg-ink-50 p-3 text-xs text-ink-600">
+            <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-ink-500" aria-hidden />
             Transfers are checked by the token contract itself. Both wallets must be verified in the OUSIA identity registry.
           </p>
           <Button size="lg" className="w-full" disabled={!!invalid} onClick={send}>
@@ -93,9 +93,9 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
 
       {step === 'checking' && (
         <div className="flex flex-col items-center py-8 text-center" role="status">
-          <Spinner className="h-12 w-12 text-navy-500" />
-          <p className="mt-4 text-lg font-semibold text-navy-950">Checking transfer rules on-chain…</p>
-          <p className="mt-1 text-sm text-navy-500">Identity registry · country restrictions · wallet screening</p>
+          <Spinner className="h-12 w-12 text-ink-500" />
+          <p className="mt-4 text-lg font-semibold text-ink-950">Checking transfer rules on-chain…</p>
+          <p className="mt-1 text-sm text-ink-500">Identity registry · country restrictions · wallet screening</p>
         </div>
       )}
 
@@ -120,21 +120,21 @@ export function TransferFlow({ asset, onClose }: { asset: Asset; onClose: () => 
                 <CheckCircle2 className="animate-pop mt-0.5 h-6 w-6 shrink-0 text-accent-600" aria-hidden />
                 <div>
                   <p className="font-semibold text-accent-700">Transfer settled</p>
-                  <p className="mt-1 text-sm text-navy-800">
+                  <p className="mt-1 text-sm text-ink-800">
                     {formatNumber(result.tokens ?? 0)} {asset.symbol} sent to {recipient?.name}. All compliance checks passed, settled in {(result.durationMs / 1000).toFixed(1)}s.
                   </p>
                 </div>
               </div>
             </div>
           )}
-          <dl className="flex justify-between gap-3 rounded-xl bg-navy-50 p-3 text-sm">
+          <dl className="flex justify-between gap-3 rounded-xl bg-ink-50 p-3 text-sm">
             <div className="min-w-0">
-              <dt className="text-xs text-navy-500">Tx hash</dt>
-              <dd className="truncate font-mono text-navy-900">{shortHash(result.txHash, 10, 8)}</dd>
+              <dt className="text-xs text-ink-500">Tx hash</dt>
+              <dd className="truncate font-mono text-ink-900">{shortHash(result.txHash, 10, 8)}</dd>
             </div>
             <div className="text-right">
-              <dt className="text-xs text-navy-500">Block</dt>
-              <dd className="font-mono text-navy-900">{formatBlock(result.block)}</dd>
+              <dt className="text-xs text-ink-500">Block</dt>
+              <dd className="font-mono text-ink-900">{formatBlock(result.block)}</dd>
             </div>
           </dl>
           <div className="grid gap-2 sm:grid-cols-2">

@@ -43,11 +43,11 @@ function AssetPanel({ asset }: { asset: Asset }) {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-navy-50 px-2 py-0.5 text-xs font-medium text-navy-700">{asset.assetClass}</span>
+              <span className="rounded-md bg-ink-50 px-2 py-0.5 text-xs font-medium text-ink-700">{asset.assetClass}</span>
               <StatusBadge status={asset.status} />
             </div>
-            <h2 className="mt-2 text-lg font-semibold text-navy-950 md:text-xl">{asset.name}</h2>
-            <p className="mt-1 flex items-center gap-1.5 text-sm text-navy-500">
+            <h2 className="mt-2 text-lg font-semibold text-ink-950 md:text-xl">{asset.name}</h2>
+            <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-500">
               <Flag country={asset.country} />
               {asset.location} · {JURISDICTION_LABEL[asset.jurisdiction]}
             </p>
@@ -60,9 +60,9 @@ function AssetPanel({ asset }: { asset: Asset }) {
             ['Tokens issued', `${formatNumber(issued)}`],
             ['Raised', formatInr(raised)],
           ].map(([k, v]) => (
-            <div key={k} className="rounded-xl bg-navy-50 p-3">
-              <dt className="text-xs text-navy-500">{k}</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-navy-950">{v}</dd>
+            <div key={k} className="rounded-xl bg-ink-50 p-3">
+              <dt className="text-xs text-ink-500">{k}</dt>
+              <dd className="mt-0.5 text-lg font-semibold text-ink-950">{v}</dd>
             </div>
           ))}
         </dl>
@@ -71,7 +71,7 @@ function AssetPanel({ asset }: { asset: Asset }) {
       <Card as="section" className="p-5 md:p-6">
         <SectionTitle>Issuance workflow</SectionTitle>
         <IssuanceStepper asset={asset} />
-        <div className="mt-6 border-t border-navy-100 pt-5">
+        <div className="mt-6 border-t border-ink-100 pt-5">
           <StageAction asset={asset} />
         </div>
       </Card>
@@ -104,8 +104,8 @@ function StageAction({ asset }: { asset: Asset }) {
   if (asset.status === 'SUBMITTED') {
     return (
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="flex items-start gap-2 text-sm text-navy-700">
-          <Scale className="mt-0.5 h-4 w-4 shrink-0 text-navy-500" aria-hidden />
+        <p className="flex items-start gap-2 text-sm text-ink-700">
+          <Scale className="mt-0.5 h-4 w-4 shrink-0 text-ink-500" aria-hidden />
           Legal counsel is verifying title and the SPV structure.
         </p>
         <Button
@@ -126,7 +126,7 @@ function StageAction({ asset }: { asset: Asset }) {
   if (asset.status === 'IN_REVIEW') {
     return (
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="flex items-start gap-2 text-sm text-navy-700">
+        <p className="flex items-start gap-2 text-sm text-ink-700">
           <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" aria-hidden />
           Awaiting OUSIA Compliance review. Token issuance unlocks once the asset is approved.
         </p>
@@ -191,12 +191,12 @@ function StageAction({ asset }: { asset: Asset }) {
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <div className="text-sm text-navy-700">
+      <div className="text-sm text-ink-700">
         <p className="flex items-center gap-2 font-medium text-accent-700">
           <CheckCircle2 className="h-4 w-4" aria-hidden /> Live · distribution open to eligible investors
         </p>
         {mint && (
-          <p className="mt-1 text-xs text-navy-500">
+          <p className="mt-1 text-xs text-ink-500">
             {formatNumber(mint.tokens ?? 0)} {asset.symbol} minted · tx <Hash hash={mint.txHash} /> · block {formatBlock(mint.block)}
           </p>
         )}
@@ -233,7 +233,7 @@ function UploadButton({ asset }: { asset: Asset }) {
         Upload
       </Button>
       <Modal open={open} onClose={() => !busy && setOpen(false)} title="Upload document" dismissable={!busy}>
-        <p className="text-sm text-navy-600">Demo mode: only the file name is recorded and its hash is anchored on-chain. File contents never leave your device.</p>
+        <p className="text-sm text-ink-600">Demo mode: only the file name is recorded and its hash is anchored on-chain. File contents never leave your device.</p>
         <input
           ref={fileRef}
           type="file"
@@ -248,7 +248,7 @@ function UploadButton({ asset }: { asset: Asset }) {
         <Button className="mt-4 w-full" variant="secondary" disabled={!!busy} onClick={() => fileRef.current?.click()} icon={<Upload className="h-4 w-4" aria-hidden />} data-autofocus>
           Choose a file from this device
         </Button>
-        <p className="mt-5 text-xs font-medium uppercase tracking-wide text-navy-500">Or add a sample document</p>
+        <p className="mt-5 text-xs font-medium uppercase tracking-wide text-ink-500">Or add a sample document</p>
         <ul className="mt-2 space-y-2">
           {MOCK_FILES.filter((n) => !asset.documents.some((d) => d.name === n)).map((name) => (
             <li key={name}>
@@ -302,12 +302,12 @@ function NewAssetModal({ open, onClose }: { open: boolean; onClose: () => void }
     }
   };
 
-  const field = 'mt-1.5 h-11 w-full rounded-xl border border-navy-200 bg-white px-3 text-navy-900';
+  const field = 'mt-1.5 h-11 w-full rounded-xl border border-ink-200 bg-white px-3 text-ink-900';
   return (
     <Modal open={open} onClose={onClose} title="New asset" dismissable={!busy}>
       <form onSubmit={submit} className="space-y-4" noValidate>
         <div>
-          <label htmlFor="na-name" className="text-sm font-medium text-navy-800">
+          <label htmlFor="na-name" className="text-sm font-medium text-ink-800">
             Asset name
           </label>
           <input
@@ -328,7 +328,7 @@ function NewAssetModal({ open, onClose }: { open: boolean; onClose: () => void }
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor="na-class" className="text-sm font-medium text-navy-800">
+            <label htmlFor="na-class" className="text-sm font-medium text-ink-800">
               Asset class
             </label>
             <select id="na-class" className={field} value={assetClass} onChange={(e) => setAssetClass(e.target.value as AssetClass)}>
@@ -338,7 +338,7 @@ function NewAssetModal({ open, onClose }: { open: boolean; onClose: () => void }
             </select>
           </div>
           <div>
-            <label htmlFor="na-jur" className="text-sm font-medium text-navy-800">
+            <label htmlFor="na-jur" className="text-sm font-medium text-ink-800">
               Jurisdiction
             </label>
             <select id="na-jur" className={field} value={jur} onChange={(e) => setJur(e.target.value as Jurisdiction)}>
@@ -350,13 +350,13 @@ function NewAssetModal({ open, onClose }: { open: boolean; onClose: () => void }
             </select>
           </div>
           <div>
-            <label htmlFor="na-size" className="text-sm font-medium text-navy-800">
+            <label htmlFor="na-size" className="text-sm font-medium text-ink-800">
               Size (₹ Cr)
             </label>
             <input id="na-size" inputMode="decimal" className={field} value={size} onChange={(e) => setSize(e.target.value.replace(/[^\d.]/g, ''))} aria-invalid={touched && !!sizeError} aria-describedby="na-size-err" />
           </div>
           <div>
-            <label htmlFor="na-yield" className="text-sm font-medium text-navy-800">
+            <label htmlFor="na-yield" className="text-sm font-medium text-ink-800">
               Target yield (%)
             </label>
             <input
@@ -375,7 +375,7 @@ function NewAssetModal({ open, onClose }: { open: boolean; onClose: () => void }
             {sizeError}
           </p>
         )}
-        <p className="rounded-xl bg-navy-50 p-3 text-xs text-navy-600">
+        <p className="rounded-xl bg-ink-50 p-3 text-xs text-ink-600">
           Tokens are priced at ₹1,000. {sizeNum > 0 ? `${formatNumber(Math.round((sizeNum * 1e7) / 1000))} tokens will be minted after approval.` : ''}{' '}
           <Badge tone="neutral">Starts as Submitted</Badge>
         </p>

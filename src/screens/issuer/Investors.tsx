@@ -35,7 +35,7 @@ export function IssuerInvestors() {
           <EmptyState icon={<Users className="h-5 w-5" aria-hidden />} title="No tokens issued yet" body="The cap table populates once tokens are minted and distributed." />
         ) : (
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-navy-100 text-xs uppercase tracking-wide text-navy-500">
+            <thead className="border-b border-ink-100 text-xs uppercase tracking-wide text-ink-500">
               <tr>
                 <th scope="col" className="px-4 py-3 font-medium">Holder</th>
                 <th scope="col" className="hidden px-3 py-3 font-medium sm:table-cell">KYC</th>
@@ -43,39 +43,39 @@ export function IssuerInvestors() {
                 <th scope="col" className="px-4 py-3 text-right font-medium">Share</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-navy-100">
+            <tbody className="divide-y divide-ink-100">
               {holders.map((h) => (
                 <tr key={h.wallet}>
                   <td className="px-4 py-3">
-                    <span className="block font-medium text-navy-900">{h.name}</span>
-                    <span className="block font-mono text-[11px] text-navy-500">{shortHash(h.wallet, 4, 4)}</span>
+                    <span className="block font-medium text-ink-900">{h.name}</span>
+                    <span className="block font-mono text-[11px] text-ink-500">{shortHash(h.wallet, 4, 4)}</span>
                   </td>
                   <td className="hidden px-3 py-3 sm:table-cell">
                     <KycBadge status={h.kyc} />
                   </td>
                   <td className="px-3 py-3 text-right">
-                    <span className="block text-navy-900">{formatNumber(h.tokens)}</span>
-                    <span className="block text-xs text-navy-500">{formatInr(h.tokens * asset.pricePerToken)}</span>
+                    <span className="block text-ink-900">{formatNumber(h.tokens)}</span>
+                    <span className="block text-xs text-ink-500">{formatInr(h.tokens * asset.pricePerToken)}</span>
                   </td>
-                  <td className="px-4 py-3 text-right text-navy-700">{((h.tokens / asset.totalTokens) * 100).toFixed(4)}%</td>
+                  <td className="px-4 py-3 text-right text-ink-700">{((h.tokens / asset.totalTokens) * 100).toFixed(4)}%</td>
                 </tr>
               ))}
-              <tr className="bg-navy-50/60">
+              <tr className="bg-ink-50/60">
                 <td className="px-4 py-3">
-                  <span className="block font-medium text-navy-900">ABC Capital treasury (undistributed)</span>
-                  <span className="block font-mono text-[11px] text-navy-500">{shortHash(ISSUER_TREASURY[asset.issuerId], 4, 4)}</span>
+                  <span className="block font-medium text-ink-900">ABC Capital treasury (undistributed)</span>
+                  <span className="block font-mono text-[11px] text-ink-500">{shortHash(ISSUER_TREASURY[asset.issuerId], 4, 4)}</span>
                 </td>
                 <td className="hidden px-3 py-3 sm:table-cell">
-                  <span className="text-xs text-navy-500">Issuer</span>
+                  <span className="text-xs text-ink-500">Issuer</span>
                 </td>
-                <td className="px-3 py-3 text-right text-navy-900">{formatNumber(unsold)}</td>
-                <td className="px-4 py-3 text-right text-navy-700">{((unsold / asset.totalTokens) * 100).toFixed(2)}%</td>
+                <td className="px-3 py-3 text-right text-ink-900">{formatNumber(unsold)}</td>
+                <td className="px-4 py-3 text-right text-ink-700">{((unsold / asset.totalTokens) * 100).toFixed(2)}%</td>
               </tr>
             </tbody>
           </table>
         )}
       </Card>
-      {live && holders.length === 0 && <p className="mt-3 text-sm text-navy-500">No investors yet. Distribution is open in the investor app.</p>}
+      {live && holders.length === 0 && <p className="mt-3 text-sm text-ink-500">No investors yet. Distribution is open in the investor app.</p>}
     </>
   );
 }

@@ -48,23 +48,23 @@ export function IssuanceStepper({ asset }: { asset: Asset }) {
         return (
           <li key={step.label} className="relative flex gap-3 pb-5 last:pb-0 md:flex-col md:gap-2 md:pb-0" aria-current={active ? 'step' : undefined}>
             {i < STEPS.length - 1 && (
-              <span aria-hidden className={cx('absolute left-[15px] top-8 h-[calc(100%-2rem)] w-0.5 md:left-8 md:top-[15px] md:h-0.5 md:w-[calc(100%-1.5rem)]', done ? 'bg-accent-500' : 'bg-navy-100')} />
+              <span aria-hidden className={cx('absolute left-[15px] top-8 h-[calc(100%-2rem)] w-0.5 md:left-8 md:top-[15px] md:h-0.5 md:w-[calc(100%-1.5rem)]', done ? 'bg-accent-500' : 'bg-ink-100')} />
             )}
             <span
               key={`${step.label}-${status}`}
               className={cx(
                 'animate-pop relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold',
                 done && 'bg-accent-600 text-white',
-                active && !failed && 'bg-navy-900 text-white ring-4 ring-navy-100',
+                active && !failed && 'bg-ink-gradient text-white ring-4 ring-brass-200',
                 failed && 'bg-red-600 text-white ring-4 ring-red-100',
-                !done && !active && 'bg-white text-navy-500 ring-1 ring-navy-200',
+                !done && !active && 'bg-white text-ink-500 ring-1 ring-ink-200',
               )}
             >
               {done ? <Check className="h-4 w-4" aria-hidden /> : failed ? <X className="h-4 w-4" aria-hidden /> : i + 1}
             </span>
             <span className="min-w-0 pt-1 md:pt-0">
-              <span className="block text-sm font-medium text-navy-900">{step.label}</span>
-              <span className={cx('block text-xs', failed ? 'text-red-700' : active ? 'font-medium text-navy-800' : 'text-navy-500')}>
+              <span className="block text-sm font-medium text-ink-900">{step.label}</span>
+              <span className={cx('block text-xs', failed ? 'text-red-700' : active ? 'font-medium text-ink-800' : 'text-ink-500')}>
                 {status}
                 {when ? ` · ${formatDateTime(when)}` : ''}
               </span>

@@ -107,8 +107,8 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
         <ol className="mb-5 flex gap-1.5" aria-label="Progress">
           {STEP_LABELS.map((label, i) => (
             <li key={label} className="flex-1">
-              <div className={cx('h-1 rounded-full', i <= stepIndex ? 'bg-accent-500' : 'bg-navy-100')} />
-              <p className={cx('mt-1 text-[11px]', i === stepIndex ? 'font-semibold text-navy-900' : 'text-navy-500')} aria-current={i === stepIndex ? 'step' : undefined}>
+              <div className={cx('h-1 rounded-full', i <= stepIndex ? 'bg-gradient-to-r from-brass-300 to-brass-600' : 'bg-ink-100')} />
+              <p className={cx('mt-1 text-[11px]', i === stepIndex ? 'font-semibold text-ink-900' : 'text-ink-500')} aria-current={i === stepIndex ? 'step' : undefined}>
                 {label}
               </p>
             </li>
@@ -119,11 +119,11 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
       {step === 'amount' && (
         <div className="space-y-4">
           <div>
-            <label htmlFor="invest-amount" className="text-sm font-medium text-navy-800">
+            <label htmlFor="invest-amount" className="text-sm font-medium text-ink-800">
               Amount (INR)
             </label>
-            <div className="mt-1.5 flex items-center rounded-xl border border-navy-200 px-3 focus-within:border-accent-600 focus-within:ring-2 focus-within:ring-accent-100">
-              <span className="text-lg font-semibold text-navy-500">₹</span>
+            <div className="mt-1.5 flex items-center rounded-xl border border-ink-200 px-3 focus-within:border-accent-600 focus-within:ring-2 focus-within:ring-accent-100">
+              <span className="text-lg font-semibold text-ink-500">₹</span>
               <input
                 id="invest-amount"
                 data-autofocus
@@ -131,7 +131,7 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
                 autoComplete="off"
                 value={raw ? Number(raw.replace(/[^\d]/g, '') || 0).toLocaleString('en-IN') : ''}
                 onChange={(e) => setRaw(e.target.value.replace(/[^\d]/g, '').slice(0, 9))}
-                className="h-12 w-full bg-transparent px-2 text-xl font-semibold text-navy-950 outline-none"
+                className="h-12 w-full bg-transparent px-2 text-xl font-semibold text-ink-950 outline-none"
                 aria-describedby="invest-hint"
               />
             </div>
@@ -143,7 +143,7 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
                     key={v}
                     type="button"
                     onClick={() => setRaw(String(v))}
-                    className="h-8 rounded-full px-3 text-xs font-medium text-navy-700 ring-1 ring-inset ring-navy-200 hover:bg-navy-50"
+                    className="h-8 rounded-full px-3 text-xs font-medium text-ink-700 ring-1 ring-inset ring-ink-200 hover:bg-ink-50"
                   >
                     {formatInr(v)}
                   </button>
@@ -151,25 +151,33 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
             </div>
           </div>
 
-          <div id="invest-hint" className="rounded-xl bg-navy-50 p-4 text-sm">
+          <div id="invest-hint" className="rounded-xl bg-ink-50 p-4 text-sm">
             <div className="flex justify-between">
-              <span className="text-navy-600">Tokens</span>
-              <span className="font-semibold text-navy-950">
+              <span className="text-ink-600">Tokens</span>
+              <span className="font-semibold text-ink-950">
                 {formatNumber(tokens)} {asset.symbol}
               </span>
             </div>
             <div className="mt-1 flex justify-between">
-              <span className="text-navy-600">Price per token</span>
-              <span className="text-navy-900">{formatInr(asset.pricePerToken)}</span>
+              <span className="text-ink-600">Price per token</span>
+              <span className="text-ink-900">{formatInr(asset.pricePerToken)}</span>
             </div>
             <div className="mt-1 flex justify-between">
-              <span className="text-navy-600">You invest</span>
-              <span className="text-right font-semibold text-navy-950">
+              <span className="text-ink-600">You invest</span>
+              <span className="text-right font-semibold text-ink-950">
                 {formatInr(amount)}
-                {fx && <span className="block text-[11px] font-normal text-navy-500">{fx}</span>}
+                {fx && <span className="block text-[11px] font-normal text-ink-500">{fx}</span>}
               </span>
             </div>
-            {amount !== amountIn && tokens > 0 && <p className="mt-2 text-xs text-navy-500">Rounded down to whole tokens.</p>}
+            {asset.yieldPct != null && amount > 0 && (
+              <div className="mt-2 flex justify-between border-t border-ink-200 pt-2">
+                <span className="text-ink-600">Est. annual income</span>
+                <span className="font-semibold text-brass-700">
+                  {formatInr((amount * asset.yieldPct) / 100)} <span className="text-xs font-normal text-ink-500">at {asset.yieldPct}%</span>
+                </span>
+              </div>
+            )}
+            {amount !== amountIn && tokens > 0 && <p className="mt-2 text-xs text-ink-500">Rounded down to whole tokens.</p>}
           </div>
 
           {validation && (
@@ -194,13 +202,13 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
 
       {step === 'checks' && (
         <div className="space-y-4">
-          <p className="text-sm text-navy-600">Running the compliance rule engine for this investment…</p>
+          <p className="text-sm text-ink-600">Running the compliance rule engine for this investment…</p>
           <ul className="space-y-2">
             {checks.map((c, i) => {
               const done = i < passed;
               const running = i === passed;
               return (
-                <li key={c.label} className={cx('flex items-start gap-3 rounded-xl border p-3 transition-colors', done ? (c.skipped ? 'border-amber-200 bg-amber-50' : 'border-accent-100 bg-accent-50/60') : 'border-navy-100')}>
+                <li key={c.label} className={cx('flex items-start gap-3 rounded-xl border p-3 transition-colors', done ? (c.skipped ? 'border-amber-200 bg-amber-50' : 'border-accent-100 bg-accent-50/60') : 'border-ink-100')}>
                   <span className="mt-0.5">
                     {done ? (
                       c.skipped ? (
@@ -209,16 +217,16 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
                         <CheckCircle2 className="animate-pop h-5 w-5 text-accent-600" aria-label="Passed" />
                       )
                     ) : running ? (
-                      <Spinner className="h-5 w-5 text-navy-400" />
+                      <Spinner className="h-5 w-5 text-ink-400" />
                     ) : (
-                      <Circle className="h-5 w-5 text-navy-200" aria-hidden />
+                      <Circle className="h-5 w-5 text-ink-200" aria-hidden />
                     )}
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-medium text-navy-900">
+                    <span className="block text-sm font-medium text-ink-900">
                       {c.label} {done && !c.skipped && '✓'}
                     </span>
-                    <span className="block text-xs text-navy-500">{done || running ? c.detail : 'Waiting'}</span>
+                    <span className="block text-xs text-ink-500">{done || running ? c.detail : 'Waiting'}</span>
                   </span>
                 </li>
               );
@@ -232,7 +240,7 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
 
       {step === 'confirm' && (
         <div className="space-y-4">
-          <dl className="divide-y divide-navy-100 rounded-xl border border-navy-100 text-sm">
+          <dl className="divide-y divide-ink-100 rounded-xl border border-ink-100 text-sm">
             {[
               ['Asset', asset.name],
               ['Tokens', `${formatNumber(tokens)} ${asset.symbol}`],
@@ -242,12 +250,12 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
               ['Cash after', formatInr(priya.balance - amount)],
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 px-4 py-2.5">
-                <dt className="text-navy-600">{k}</dt>
-                <dd className="text-right font-medium text-navy-950">{v}</dd>
+                <dt className="text-ink-600">{k}</dt>
+                <dd className="text-right font-medium text-ink-950">{v}</dd>
               </div>
             ))}
           </dl>
-          <p className="text-xs text-navy-500">By confirming you agree to the offering terms. Tokens are delivered to your wallet and cash is debited in the same transaction.</p>
+          <p className="text-xs text-ink-500">By confirming you agree to the offering terms. Tokens are delivered to your wallet and cash is debited in the same transaction.</p>
           <div className="flex gap-3">
             <Button variant="secondary" size="lg" className="flex-1" onClick={() => setStep('amount')}>
               Edit
@@ -262,8 +270,8 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
       {step === 'settling' && (
         <div className="flex flex-col items-center py-8 text-center" role="status">
           <Spinner className="h-12 w-12 text-accent-600" />
-          <p className="mt-4 text-lg font-semibold text-navy-950">Settling on-chain…</p>
-          <p className="mt-1 text-sm text-navy-500">Delivery versus payment: cash and tokens move together, or not at all.</p>
+          <p className="mt-4 text-lg font-semibold text-ink-950">Settling on-chain…</p>
+          <p className="mt-1 text-sm text-ink-500">Delivery versus payment: cash and tokens move together, or not at all.</p>
         </div>
       )}
 
@@ -285,29 +293,29 @@ export function InvestFlow({ asset, open, onClose }: { asset: Asset; open: boole
             <div className="animate-pop flex h-16 w-16 items-center justify-center rounded-full bg-accent-50">
               <CheckCircle2 className="h-9 w-9 text-accent-600" aria-hidden />
             </div>
-            <p className="mt-3 text-2xl font-semibold text-navy-950">{formatInr(result.amountInr ?? 0)}</p>
-            <p className="text-sm text-navy-600">
+            <p className="mt-3 text-2xl font-semibold text-ink-950">{formatInr(result.amountInr ?? 0)}</p>
+            <p className="text-sm text-ink-600">
               {formatNumber(result.tokens ?? 0)} {asset.symbol} delivered to your wallet
             </p>
-            <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-3 py-1 text-xs font-medium text-white">
-              <Zap className="h-3.5 w-3.5 text-accent-500" aria-hidden />
+            <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-ink-gradient px-3 py-1 text-xs font-medium text-white shadow-sm">
+              <Zap className="h-3.5 w-3.5 text-brass-300" aria-hidden />
               Settled in {(result.durationMs / 1000).toFixed(1)}s · 24x7
             </p>
           </div>
-          <dl className="space-y-3 rounded-xl bg-navy-50 p-4 text-sm">
+          <dl className="space-y-3 rounded-xl bg-ink-50 p-4 text-sm">
             <div>
-              <dt className="text-xs text-navy-500">Transaction hash</dt>
+              <dt className="text-xs text-ink-500">Transaction hash</dt>
               <dd className="mt-0.5 flex items-start gap-1">
-                <span className="min-w-0 flex-1 break-all font-mono text-xs text-navy-900">{result.txHash}</span>
+                <span className="min-w-0 flex-1 break-all font-mono text-xs text-ink-900">{result.txHash}</span>
                 <CopyButton value={result.txHash} label="Copy transaction hash" />
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-navy-600">Block</dt>
-              <dd className="font-mono font-medium text-navy-950">{formatBlock(result.block)}</dd>
+              <dt className="text-ink-600">Block</dt>
+              <dd className="font-mono font-medium text-ink-950">{formatBlock(result.block)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-navy-600">Status</dt>
+              <dt className="text-ink-600">Status</dt>
               <dd className="font-medium text-accent-700">Confirmed</dd>
             </div>
           </dl>

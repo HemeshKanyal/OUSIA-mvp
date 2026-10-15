@@ -21,8 +21,8 @@ export function IssuerTokens() {
             <Card key={asset.id} as="article" className="min-w-0 p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="font-mono text-sm font-semibold text-navy-950">{asset.symbol}</p>
-                  <h2 className="truncate text-sm text-navy-600">{asset.name}</h2>
+                  <p className="font-mono text-sm font-semibold text-ink-950">{asset.symbol}</p>
+                  <h2 className="truncate text-sm text-ink-600">{asset.name}</h2>
                 </div>
                 <StatusBadge status={asset.status} />
               </div>
@@ -46,10 +46,10 @@ export function IssuerTokens() {
                       </KeyValue>
                     </div>
                   </dl>
-                  <p className="mt-4 text-xs font-medium uppercase tracking-wide text-navy-500">Compliance modules</p>
+                  <p className="mt-4 text-xs font-medium uppercase tracking-wide text-ink-500">Compliance modules</p>
                   <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
                     {MODULES.map((m) => (
-                      <li key={m} className="flex items-center gap-2 text-sm text-navy-700">
+                      <li key={m} className="flex items-center gap-2 text-sm text-ink-700">
                         <CheckCircle2 className="h-4 w-4 shrink-0 text-accent-600" aria-hidden /> {m}
                       </li>
                     ))}
